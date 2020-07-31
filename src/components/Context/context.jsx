@@ -12,11 +12,14 @@ class InflowsProvider extends Component {
             currentYear: new Date().getFullYear(),
             reviewYears: [],
             gs15ReviewYears: [`${new Date().getFullYear()}`],
-            years: []
+            years: [],
+            config : {
+                headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjIzY2E3ODY4ZDU3YjViZWM1NjU0ZTYiLCJpYXQiOjE1OTYxODE4NDJ9.KpDl4sTqkVG5zOvXHyACNbIB8VWVjZAk16nJok0tuHw' }
+            }
         }
     }
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/inflows/')
+        axios.get('http://127.0.0.1:3000/inflows', this.state.config)
             .then(res => {
                 this.setState({ inflows: res.data })
                 this.getAllYears(res.data)
@@ -30,20 +33,23 @@ class InflowsProvider extends Component {
             if (!years.includes(year.toString())) years.push(year.toString())
         })
         this.setState({years})
+
+        // this.postToNode(inflows)
     }
-
-    // populateModel = () => {
-    //     let singleYearInflows = this.state.inflows.filter(inflow => inflow.Day_of_Input.includes("2009"))
-    //     let result = {}
-    //     let dataPoints = singleYearInflows.map(inflow => {
-    //         let data = { x: inflow.Day_of_Input, y: inflow.Luphohlo_Daily_Level }
-    //         result = { ...data }
-    //         return result
-    //     })
-    //     return dataPoints
-
-    // }
-
+    
+    postToNode (inflows) {
+        const config = {
+            headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjIzY2E3ODY4ZDU3YjViZWM1NjU0ZTYiLCJpYXQiOjE1OTYxODE4NDJ9.KpDl4sTqkVG5zOvXHyACNbIB8VWVjZAk16nJok0tuHw' }
+        };
+        inflows.forEach (item => {
+            axios.post( 
+                'http://localhost:3000/inflows',
+                item,
+                config
+              ).then(res =>console.log(res)).catch(res => console.log(res));
+        })
+        
+    }
     populateGS15Model = (reviewYear) => {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         let singleYearInflows = this.state.inflows.filter(inflow => inflow.Day_of_Input.includes(reviewYear))
@@ -74,10 +80,13 @@ class InflowsProvider extends Component {
 
         // Current model
         let singleYearInflows = this.state.inflows.filter(inflow => inflow.Day_of_Input.includes(reviewYear))
-        let sample = singleYearInflows.filter(inflow => inflow.Day_of_Input.slice(-2).includes("01") || inflow.Day_of_Input.includes("01-01"))
         let result = {}
-        let dataPoints = sample.map(inflow => {
-            let data = { label: (new Date(inflow.Day_of_Input)).toLocaleString('default', { month: 'long' }), y: parseFloat(inflow.Luphohlo_Daily_Level) }
+        let dataPoints = singleYearInflows.map(inflow => {
+            let year = inflow.Day_of_Input.split('-')
+            year[0] = "2010"
+            let newDay_of_Input = year.join('-')
+            let data = { x: (new Date(newDay_of_Input)), y: parseFloat(inflow.Luphohlo_Daily_Level) }
+            console.log(data);
             result = { ...data }
             return result
         })
@@ -119,27 +128,24 @@ class InflowsProvider extends Component {
                 type: "spline",
                 name: "model-opt",
                 showInLegend: true,
-                xValueFormatString: "MMM YYYY",
+                xValueFormatString: "DD MMM",
                 yValueFormatString: "#,###.## m.a.s.l",
-                xValueType: "dateTime",
                 dataPoints: defaultModel.defaultModel.opt()
             },
             {
                 type: "spline",
                 name: "model-min",
                 showInLegend: true,
-                xValueFormatString: "MMM YYYY",
+                xValueFormatString: "DD MMM",
                 yValueFormatString: "#,###.## m.a.s.l",
-                xValueType: "dateTime",
                 dataPoints: defaultModel.defaultModel.min()
             },
             {
                 type: "spline",
                 name: "model-max",
                 showInLegend: true,
-                xValueFormatString: "MMM YYYY",
+                xValueFormatString: "DD MMM",
                 yValueFormatString: "#,###.## m.a.s.l",
-                xValueType: "dateTime",
                 dataPoints: defaultModel.defaultModel.max()
             }
         ]
@@ -170,10 +176,10 @@ class InflowsProvider extends Component {
 
     singleYearDataPoint = (year) => {
         let data = {
-            type: "spline",
+            type: "line",
             name: year,
             showInLegend: true,
-            xValueFormatString: "MMM YYYY",
+            xValueFormatString: "DD MMM",
             yValueFormatString: "#,###.## m.a.s.l",
             xValueType: "dateTime",
             dataPoints: this.populateModel(year)

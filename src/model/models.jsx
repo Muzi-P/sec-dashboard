@@ -2,51 +2,51 @@ const defaultModel = {
     opt: () => {
         let dataPoints = [
             {
-               label: "January",
+               x:  new Date(2010, 0, 15),
                 y: 1010.31
             },
             {
-               label: "February",
+               x: new Date(2010, 1, 15),
                 y: 1012.93
             },
             {
-               label: "March",
+               x: new Date(2010, 2, 15),
                 y: 1014.64
             },
             {
-               label: "April",
+               x: new Date(2010, 3, 15),
                 y: 1015.6
             },
             {
-               label: "May",
+               x: new Date(2010, 4, 15),
                 y: 1015.32
             },
             {
-               label: "June",
+               x: new Date(2010, 5, 15),
                 y: 1012.47
             },
             {
-               label: "July",
+               x: new Date(2010, 6, 15),
                 y: 1009.47
             },
             {
-               label: "August",
+               x: new Date(2010, 7, 15),
                 y: 1007.14
             },
             {
-               label: "September",
+               x: new Date(2010, 8, 15),
                 y: 1004.92
             },
             {
-               label: "October",
+               x: new Date(2010, 9, 15),
                 y: 1003.55
             },
             {
-               label: "November",
+               x: new Date(2010, 10, 15),
                 y: 1003.05
             },
             {
-               label: "December",
+               x: new Date(2010, 11, 15),
                 y: 1004.88
             },
         ]
@@ -55,51 +55,51 @@ const defaultModel = {
     min: () => {
         let dataPoints = [
             {
-               label: "January",
+               x: new Date(2010, 0, 15),
                 y: 1008.68
             },
             {
-               label: "February",
+               x: new Date(2010, 1, 15),
                 y: 1012.1
             },
             {
-               label: "March",
+               x: new Date(2010, 2, 15),
                 y: 1014.39
             },
             {
-               label: "April",
+               x: new Date(2010, 3, 15),
                 y: 1015.6
             },
             {
-               label: "May",
+               x: new Date(2010, 4, 15),
                 y: 1015.26
             },
             {
-               label: "June",
+               x: new Date(2010, 5, 15),
                 y: 1012.27
             },
             {
-               label: "July",
+               x: new Date(2010, 6, 15),
                 y: 1009.09
             },
             {
-               label: "August",
+               x: new Date(2010, 7, 15),
                 y: 1006.54
             },
             {
-               label: "September",
+               x: new Date(2010, 8, 15),
                 y: 1004.28
             },
             {
-               label: "October",
+               x: new Date(2010, 9, 15),
                 y: 1003.08
             },
             {
-               label: "November",
+               x: new Date(2010, 10, 15),
                 y: 1002.26
             },
             {
-               label: "December",
+               x: new Date(2010, 11, 15),
                 y: 1003.79
             },
         ]
@@ -108,51 +108,51 @@ const defaultModel = {
     max: () => {
         let dataPoints = [
             {
-               label: "January",
+               x: new Date(2010, 0, 15),
                 y: 1011.78
             },
             {
-               label: "February",
+               x: new Date(2010, 1, 15),
                 y: 1013.47
             },
             {
-               label: "March",
+               x: new Date(2010, 2, 15),
                 y: 1014.75
             },
             {
-               label: "April",
+               x: new Date(2010, 3, 15),
                 y: 1015.6
             },
             {
-               label: "May",
+               x: new Date(2010, 4, 15),
                 y: 1015.32
             },
             {
-               label: "June",
+               x: new Date(2010, 5, 15),
                 y: 1012.47
             },
             {
-               label: "July",
+               x: new Date(2010, 6, 15),
                 y: 1009.73
             },
             {
-               label: "August",
+               x: new Date(2010, 7, 15),
                 y: 1007.5
             },
             {
-               label: "September",
+               x: new Date(2010, 8, 15),
                 y: 1005.59
             },
             {
-               label: "October",
+               x: new Date(2010, 9, 15),
                 y: 1004.44
             },
             {
-               label: "November",
+               x: new Date(2010, 10, 15),
                 y: 1004.06
             },
             {
-               label: "December",
+               x: new Date(2010, 11, 15),
                 y: 1005.96
             },
         ]

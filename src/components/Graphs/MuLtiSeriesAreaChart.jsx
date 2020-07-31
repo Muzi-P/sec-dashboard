@@ -25,6 +25,7 @@ class MultiSeriesAreaChart extends Component {
                 includeZero: true,
                 gridColor: "rgba(29,140,248,0.2)",
                 gridThickness: 2,
+                valueFormatString: "MMM",
                 labelFontColor: "#9a9a9a",
             },
             toolTip: {
